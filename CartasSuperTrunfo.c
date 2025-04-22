@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdlib.h>
 
 int main(){
 
     char estado1, estado2, codigoCarta1 [10], codigoCarta2 [10], nomeCidade1 [30], nomeCidade2 [30];
-    int  pontosTuristicos1, pontosTuristicos2;
+    int  pontosTuristicos1, pontosTuristicos2, comparacao1, comparacao2, resultado1 = 0, resultado2 = 0;
     unsigned long int populacao1, populacao2;
     long double superPoder1, superPoder2;
     float area1, area2, pib1, pib2, densidadePopulacional1, densidadePopulacional2, pibPerCapita1, pibPerCapita2;
@@ -87,7 +89,7 @@ int main(){
     printf("CARTA 2: \n");
     
     printf("Insira o estado, uma letra de: {A – H}: \n");
-    scanf(" \n %c", &estado2);
+    scanf(" %c", &estado2);
     
     printf("Insira o código da carta(o código da carta deve conter a letra escolhida na questão anterior seguida de um número, exe: A01): \n");
     scanf("%s", &codigoCarta2);
@@ -150,22 +152,95 @@ int main(){
 
     printf("————————————————————————————————————————————————————— \n");
 
-    /*Exibindo as comparações dos atributos das cartas:*/
-    printf("COMPARAÇÃO DOS ATRIBUTOS DAS CARTAS: \n");
+    /* Perguntando ao usuário o primeiro atributo que ele deseja comparar*/
+    printf("AGORA VOCÊ SELECIONARÁ DOIS ATRIBUTOS PARA QUE SEJA FEITA AS COMPARAÇÕES E ELEGERMOS UM VENCEDOR.\n");
+    printf("O primeiro atributo de comparação não deve ser igual ao segundo, e vice versa.\n");
+    printf("Por favor, insira o primeiro número do atributo que deseja comparar: \n");
+    printf("1 - População. 2 - Área. 3 - PIB. 4 - Número de pontos turísticos. 5 - Densidade populacional. 6 - Super poder. \n");
+    scanf(" %i", &comparacao1);
 
-    printf("Resuntado 1 para a carta 1 como vencedora e 0 para a carta 2 como vencedora! \n");
+    /* Identificando e comparando o primeiro atributo escolhido pelo usuário.*/
+    switch (comparacao1)
+    {
+        case 1:
+            resultado1 = populacao1 > populacao2 ? 1 : 0;
+            break;
+        case 2:
+            resultado1 = area1 > area2 ? 1 : 0;
+            break;
+        case 3:
+            resultado1 = pib1 > pib2 ? 1 : 0;
+            break;
+        case 4:
+            resultado1 = pontosTuristicos1 > pontosTuristicos2 ? 1 : 0;
+            break;
+        case 5:
+            resultado1 = densidadePopulacional1 < densidadePopulacional2 ? 1 : 0;
+            break;
+        case 6:
+            resultado1 = superPoder1 > superPoder2 ? 1 : 0;
+            break;
+        default:
+            printf("ERRO! Opção de comparação inválida. Tente novamente.\n");
+            exit(1);
+            break;
+    }
 
-    printf("População: %d\n", populacao1 > populacao2);
-    printf("Área: %d\n", area1 > area2);
-    printf("PIB: %d\n", pib1 > pib2);
-    printf("Numero de pontos turísticos: %d\n", pib1 > pib2);
-    printf("Densidade populacional: %d\n", densidadePopulacional1 < densidadePopulacional2);
-    printf("PIB PER CAPITA: %d\n", pibPerCapita1 > pibPerCapita2);
-    printf("Super Poder: %d\n", superPoder1 > superPoder2);
+     /* Perguntando ao usuário o segundo atributo que ele deseja comparar*/
+    printf("Por favor, insira o segundo número do atributo que deseja comparar: \n");
+    printf("1 - População. 2 - Área. 3 - PIB. 4 - Número de pontos turísticos. 5 - Densidade populacional. 6 - Super poder. \n");
+    scanf(" %i", &comparacao2);
+
+    /* Identificando e comparando o segundo atributo escolhido pelo usuário.*/
+    if (comparacao2 == comparacao1)
+    {
+        printf("ERRO! Escolha comparadores diferentes.\n");
+        exit(1);
+    } else
+    {
+        switch (comparacao2)
+        {
+            case 1:
+                resultado2 = populacao1 > populacao2 ? 1 : 0;
+                break;
+            case 2:
+                resultado2 = area1 > area2 ? 1 : 0;
+                break;
+            case 3:
+                resultado2 = pib1 > pib2 ? 1 : 0;
+                break;
+            case 4:
+                resultado2 = pontosTuristicos1 > pontosTuristicos2 ? 1 : 0;
+                break;
+            case 5:
+                resultado2 = densidadePopulacional1 < densidadePopulacional2 ? 1 : 0;
+                break;
+            case 6:
+                resultado2 = superPoder1 > superPoder2 ? 1 : 0;
+                break;
+            default:
+                printf("ERRO! Opção de comparação inválida. Tente novamente.\n");
+                exit(1);
+                break;
+        }
+    }
+
+    //Comparando os resultados e exibindo o jogador vencedor.
+    printf("VENCEDOR:\n");
+    if (resultado1 && resultado2)
+    {
+        printf("Jogador 1 vencedor!\n");
+    } else if (resultado1 =! resultado2)
+    {
+        printf("Empate!\n");
+    } else
+    {
+        printf("Jogador 2 venceu!\n");
+    }
     
+    
+    
+
 return 0;
 
-
 }
-
-/*Realizando os commitis*/
